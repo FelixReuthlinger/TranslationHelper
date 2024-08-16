@@ -75,16 +75,25 @@ public static class TranslationsRegistry
             strings.AddRange(new SwitchModel(toggleSwitch).Translate());
         if (prefab.Prefab.TryGetComponent(out HoverText hoverText))
             strings.AddRange(new NameModel(hoverText).Translate());
-        if(prefab.Prefab.TryGetComponent(out Pickable pickable))
+        if (prefab.Prefab.TryGetComponent(out Pickable pickable))
             strings.AddRange(new PickableModel(pickable).Translate());
 
         if (prefab.Prefab.GetComponent<Location>())
         {
             var childTeleport = prefab.Prefab.GetComponentInChildren<Teleport>();
             if (childTeleport)
+            {
+                Logger.LogInfo($"found teleport in location: {new TeleportModel(childTeleport).Translate()}");
                 strings.AddRange(new TeleportModel(childTeleport).Translate());
+            }
+            var childRunestone = prefab.Prefab.GetComponentInChildren<RuneStone>();
+            if (childRunestone)
+            {
+                Logger.LogInfo($"found runestone in location: {new RuneStoneModel(childRunestone).Translate()}");
+                strings.AddRange(new RuneStoneModel(childRunestone).Translate());
+            }
         }
-        
+
         return strings;
     }
 }
