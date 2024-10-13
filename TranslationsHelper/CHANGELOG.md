@@ -1,14 +1,16 @@
+* 1.2.2 ->
+    * can now also print guide points from prefabs (just locations seems not to be loaded with that)
 * 1.2.0 ->
-  * added looking up teleporters as child components in locations
-* 1.1.3 -> 
-  * added "Pickable" type to model
+    * added looking up teleporters as child components in locations
+* 1.1.3 ->
+    * added "Pickable" type to model
 * 1.1.2 ->
-  * updated (no code change required) for Ashlands Valheim version 0.218.15
+    * updated (no code change required) for Ashlands Valheim version 0.218.15
 * 1.1.1 ->
-  * fixed handling multiple types for prefabs, now it might get you the ultimate amount of translations, finally :)
-* 1.1.0 -> 
-  * added a couple of new types to also get translations for them
-  * compiled for 0.217.38
+    * fixed handling multiple types for prefabs, now it might get you the ultimate amount of translations, finally :)
+* 1.1.0 ->
+    * added a couple of new types to also get translations for them
+    * compiled for 0.217.38
 * 1.0.9 -> updated dependencies, compiled for 0.217.30
 * 1.0.8 -> updated dependencies, compiled for 0.217.24
 * 1.0.7 -> updated dependencies

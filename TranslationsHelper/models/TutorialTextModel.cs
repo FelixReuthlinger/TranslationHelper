@@ -3,9 +3,16 @@ using JetBrains.Annotations;
 
 namespace TranslationsHelper.models;
 
-public class RuneStoneModel : NameModel
+public class TutorialTextModel : Translatable
 {
-    public RuneStoneModel(RuneStone original) : base(internalName: original.name, nameToken: original.m_name)
+    public TutorialTextModel(RuneStone original)
+    {
+        TextToken = original.m_text;
+        TopicToken = original.m_topic;
+        LabelToken = original.m_label;
+    }
+
+    public TutorialTextModel(Raven.RavenText original)
     {
         TextToken = original.m_text;
         TopicToken = original.m_topic;
@@ -18,7 +25,7 @@ public class RuneStoneModel : NameModel
 
     public override List<string> Translate()
     {
-        List<string> translations = base.Translate();
+        List<string> translations = new();
         translations.AddRange(new List<string>
         {
             TranslateTokenToPair(TextToken),

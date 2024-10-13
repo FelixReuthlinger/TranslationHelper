@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
-using Jotunn;
 
 namespace TranslationsHelper.models;
 

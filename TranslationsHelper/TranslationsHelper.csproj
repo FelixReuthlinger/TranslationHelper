@@ -16,6 +16,7 @@
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <LangVersion>10</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,7 +68,7 @@
     <Compile Include="models\NameModel.cs" />
     <Compile Include="models\OfferingBowlModel.cs" />
     <Compile Include="models\PickableModel.cs" />
-    <Compile Include="models\RuneStoneModel.cs" />
+    <Compile Include="models\TutorialTextModel.cs" />
     <Compile Include="models\SapCollectorModel.cs" />
     <Compile Include="models\ShipControlModel.cs" />
     <Compile Include="models\SmelterModel.cs" />

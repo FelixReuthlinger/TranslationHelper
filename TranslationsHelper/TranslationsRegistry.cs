@@ -10,6 +10,15 @@ public static class TranslationsRegistry
 {
     public static readonly Dictionary<string, List<string>> ModPrefabTranslations = new();
 
+    private static readonly List<string> skipPrefabContains = new()
+    {
+        "FAKE",
+        "fake",
+        "_FX_",
+        "_SFX_",
+        "_VFX_"
+    };
+
     public static void Initialize()
     {
         Logger.LogInfo("scanning loaded prefabs for translations");
@@ -17,17 +26,27 @@ public static class TranslationsRegistry
             .GroupBy(pair => pair.SourceMod.Name)
             .ToDictionary(
                 group => group.Key,
-                group => group.SelectMany(GetPrefabTranslations).ToList()
+                group => group
+                    .SelectMany(GetPrefabTranslations)
+                    .Where(line => line != "")
+                    .Distinct()
+                    .ToList()
             );
-        foreach (KeyValuePair<string, List<string>> pair in result)
+        foreach (KeyValuePair<string, List<string>> modTranslations in result)
         {
-            Logger.LogInfo($"adding {pair.Value.Count} translation strings for mod {pair.Key}");
-            ModPrefabTranslations.Add(pair.Key, pair.Value);
+            Logger.LogInfo($"adding {modTranslations.Value.Count} translation strings for mod {modTranslations.Key}");
+            ModPrefabTranslations.Add(modTranslations.Key, modTranslations.Value);
         }
     }
 
     private static List<string> GetPrefabTranslations(IModPrefab prefab)
     {
+        if (skipPrefabContains.Any(checkString => prefab.Prefab.name.Contains(checkString)))
+        {
+            Logger.LogDebug($"skipping fake prefab '{prefab.Prefab.name}'");
+            return new List<string>();
+        }
+
         var strings = new List<string>();
         if (prefab.Prefab == null) return strings;
         Logger.LogInfo($"scanning prefab '{prefab.Prefab.name}' for translation");
@@ -64,9 +83,9 @@ public static class TranslationsRegistry
         if (prefab.Prefab.TryGetComponent(out Plant plant))
             strings.AddRange(new NameModel(plant).Translate());
         if (prefab.Prefab.TryGetComponent(out RuneStone runeStone))
-            strings.AddRange(new RuneStoneModel(runeStone).Translate());
-        if (prefab.Prefab.TryGetComponent(out ShipControlls shipControlls))
-            strings.AddRange(new ShipControlModel(shipControlls).Translate());
+            strings.AddRange(new TutorialTextModel(runeStone).Translate());
+        if (prefab.Prefab.TryGetComponent(out ShipControlls shipControls))
+            strings.AddRange(new ShipControlModel(shipControls).Translate());
         if (prefab.Prefab.TryGetComponent(out Teleport teleport))
             strings.AddRange(new TeleportModel(teleport).Translate());
         if (prefab.Prefab.TryGetComponent(out Switch switchObject))
@@ -78,19 +97,21 @@ public static class TranslationsRegistry
         if (prefab.Prefab.TryGetComponent(out Pickable pickable))
             strings.AddRange(new PickableModel(pickable).Translate());
 
-        if (prefab.Prefab.GetComponent<Location>())
+        if (prefab.Prefab.gameObject.GetComponentInChildren<Location>())
         {
-            var childTeleport = prefab.Prefab.GetComponentInChildren<Teleport>();
+            Logger.LogInfo($"scanning location '{prefab.Prefab.name}' for translations");
+            var childTeleport = prefab.Prefab.gameObject.GetComponentInChildren<Teleport>();
             if (childTeleport)
             {
                 Logger.LogInfo($"found teleport in location: {new TeleportModel(childTeleport).Translate()}");
                 strings.AddRange(new TeleportModel(childTeleport).Translate());
             }
-            var childRunestone = prefab.Prefab.GetComponentInChildren<RuneStone>();
-            if (childRunestone)
+
+            var childRuneStone = prefab.Prefab.gameObject.GetComponentInChildren<RuneStone>();
+            if (childRuneStone)
             {
-                Logger.LogInfo($"found runestone in location: {new RuneStoneModel(childRunestone).Translate()}");
-                strings.AddRange(new RuneStoneModel(childRunestone).Translate());
+                Logger.LogInfo($"found rune stone in location: {new TutorialTextModel(childRuneStone).Translate()}");
+                strings.AddRange(new TutorialTextModel(childRuneStone).Translate());
             }
         }
 

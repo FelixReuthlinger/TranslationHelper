@@ -24,8 +24,6 @@ public static class TranslationsPrinter
             {
                 string fileNamePath = Path.Combine(OutputPath, $"{modGroup.Key}{FileSuffix}");
                 var fixedOutputs = modGroup.Value
-                    .Where(line => line != "")
-                    .Distinct()
                     .OrderBy(line => line)
                     .ToList();
                 WriteFile(fixedOutputs, fileNamePath);
