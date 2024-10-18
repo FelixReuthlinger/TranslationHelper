@@ -1,3 +1,4 @@
+* 1.2.3 -> now also provides RandomSpeak implementation
 * 1.2.2 ->
     * can now also print guide points from prefabs (just locations seems not to be loaded with that)
 * 1.2.0 ->

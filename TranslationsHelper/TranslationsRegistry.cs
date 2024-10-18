@@ -13,6 +13,7 @@ public static class TranslationsRegistry
     private static readonly List<string> skipPrefabContains = new()
     {
         "FAKE",
+        "Fake",
         "fake",
         "_FX_",
         "_SFX_",
@@ -96,6 +97,8 @@ public static class TranslationsRegistry
             strings.AddRange(new NameModel(hoverText).Translate());
         if (prefab.Prefab.TryGetComponent(out Pickable pickable))
             strings.AddRange(new PickableModel(pickable).Translate());
+        if (prefab.Prefab.TryGetComponent(out RandomSpeak speaker))
+            strings.AddRange(new RandomSpeakModel(speaker).Translate());
 
         if (prefab.Prefab.gameObject.GetComponentInChildren<Location>())
         {

@@ -68,6 +68,7 @@
     <Compile Include="models\NameModel.cs" />
     <Compile Include="models\OfferingBowlModel.cs" />
     <Compile Include="models\PickableModel.cs" />
+    <Compile Include="models\RandomSpeakModel.cs" />
     <Compile Include="models\TutorialTextModel.cs" />
     <Compile Include="models\SapCollectorModel.cs" />
     <Compile Include="models\ShipControlModel.cs" />
