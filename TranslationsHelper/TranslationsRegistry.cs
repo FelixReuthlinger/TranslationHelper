@@ -99,6 +99,9 @@ public static class TranslationsRegistry
             strings.AddRange(new PickableModel(pickable).Translate());
         if (prefab.Prefab.TryGetComponent(out RandomSpeak speaker))
             strings.AddRange(new RandomSpeakModel(speaker).Translate());
+        if (prefab.Prefab.TryGetComponent(out StatusEffect statusEffect))
+            strings.AddRange(new StatusEffectModel(statusEffect).Translate());
+
 
         if (prefab.Prefab.gameObject.GetComponentInChildren<Location>())
         {
