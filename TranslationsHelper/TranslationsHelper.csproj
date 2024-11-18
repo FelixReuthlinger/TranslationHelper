@@ -64,6 +64,7 @@
     <Compile Include="models\CookingStationModel.cs" />
     <Compile Include="models\FermenterModel.cs" />
     <Compile Include="models\IncineratorModel.cs" />
+    <Compile Include="models\ItemModel.cs" />
     <Compile Include="models\MapTableModel.cs" />
     <Compile Include="models\NameModel.cs" />
     <Compile Include="models\OfferingBowlModel.cs" />

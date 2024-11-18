@@ -12,7 +12,7 @@ namespace TranslationsHelper
     {
         private const string PluginAuthor = "FixItFelix";
         private const string PluginName = "TranslationsHelper";
-        internal const string PluginVersion = "1.2.5";
+        internal const string PluginVersion = "1.2.6";
         internal const string PluginGuid = PluginAuthor + "." + PluginName;
 
         private void Awake()
@@ -32,10 +32,7 @@ namespace TranslationsHelper
                 Logger.LogInfo($"TranslationsPrinterController called with args '{string.Join(" - ", args)}'");
                 TranslationsPrinter.WriteData(args[0]);
             }
-            else
-            {
-                TranslationsPrinter.WriteData("");
-            }
+            else TranslationsPrinter.WriteData("");
         }
 
         public override string Name => "print_translations_to_file";

@@ -52,7 +52,7 @@ public static class TranslationsRegistry
         if (prefab.Prefab == null) return strings;
         Logger.LogInfo($"scanning prefab '{prefab.Prefab.name}' for translation");
         if (prefab.Prefab.TryGetComponent(out ItemDrop itemDrop))
-            strings.AddRange(new CommonModel(itemDrop).Translate());
+            strings.AddRange(new ItemModel(itemDrop).Translate());
         if (prefab.Prefab.TryGetComponent(out Piece piece))
             strings.AddRange(new CommonModel(piece).Translate());
         if (prefab.Prefab.TryGetComponent(out Character character))
