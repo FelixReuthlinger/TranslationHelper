@@ -1,19 +1,24 @@
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace TranslationsHelper.models;
 
 public class RandomSpeakModel : Translatable
 {
-    private readonly List<string> randomTexts;
-    
+    [UsedImplicitly] public readonly List<string> RandomTexts;
+    [UsedImplicitly] public readonly string Topic;
+
     public RandomSpeakModel(RandomSpeak speaker)
     {
-        randomTexts = speaker.m_texts.ToList();
+        Topic = speaker.m_topic;
+        RandomTexts = speaker.m_texts.ToList();
     }
-    
+
     public override List<string> Translate()
     {
-        return randomTexts.Select(TranslateTokenToPair).ToList();
+        List<string> translatedTexts = RandomTexts.Select(TranslateTokenToPair).ToList();
+        translatedTexts.Add(TranslateTokenToPair(Topic));
+        return translatedTexts;
     }
 }

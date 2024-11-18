@@ -18,11 +18,8 @@ public class CookingStationModel : NameModel
 
     public override List<string> Translate()
     {
-        List<string> stationTranslations =  new List<string>
-        {
-            TranslateTokenToPair(TranslationNameToken),
-            TranslateTokenToPair(AddItemTooltipToken)
-        };
+        List<string> stationTranslations = base.Translate();
+        stationTranslations.Add(TranslateTokenToPair(AddItemTooltipToken));
         stationTranslations.AddRange(AddFoodSwitch.Translate());
         stationTranslations.AddRange(AddFuelSwitch.Translate());
         return stationTranslations;

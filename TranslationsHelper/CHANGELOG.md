@@ -1,3 +1,4 @@
+* 1.2.8 -> improvements for status effect and guide point lookup for pieces and items
 * 1.2.6 & .7 -> added translation tokens for items that provide equip effects
 * 1.2.5 -> added StatusEffect translation model
 * 1.2.4 -> updated dependencies and compiled for Valheim version 0.219.14 

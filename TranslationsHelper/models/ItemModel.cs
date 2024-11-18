@@ -4,14 +4,18 @@ using Jotunn;
 
 namespace TranslationsHelper.models;
 
-public class ItemModel : NameModel
+public class ItemModel : CommonModel
 {
     [UsedImplicitly] public readonly StatusEffectModel? ItemStatusEffect;
 
-    public ItemModel(ItemDrop fromItemDrop) : base(fromItemDrop.name, fromItemDrop.m_itemData.m_shared.m_name)
+    public ItemModel(ItemDrop fromItemDrop) : base(fromItemDrop)
     {
-        if (fromItemDrop.m_itemData.m_shared.m_equipStatusEffect != null)
+        var equipEffect = fromItemDrop.m_itemData.m_shared.m_equipStatusEffect;
+        if (equipEffect != null)
+        {
+            Logger.LogInfo($"Equip status effect {equipEffect.name} found in {fromItemDrop.name}");
             ItemStatusEffect = new StatusEffectModel(fromItemDrop.m_itemData.m_shared.m_equipStatusEffect);
+        }
     }
 
     public override List<string> Translate()
