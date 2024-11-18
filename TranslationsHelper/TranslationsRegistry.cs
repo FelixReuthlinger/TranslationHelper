@@ -101,26 +101,7 @@ public static class TranslationsRegistry
             strings.AddRange(new RandomSpeakModel(speaker).Translate());
         if (prefab.Prefab.TryGetComponent(out StatusEffect statusEffect))
             strings.AddRange(new StatusEffectModel(statusEffect).Translate());
-
-
-        if (prefab.Prefab.gameObject.GetComponentInChildren<Location>())
-        {
-            Logger.LogInfo($"scanning location '{prefab.Prefab.name}' for translations");
-            var childTeleport = prefab.Prefab.gameObject.GetComponentInChildren<Teleport>();
-            if (childTeleport)
-            {
-                Logger.LogInfo($"found teleport in location: {new TeleportModel(childTeleport).Translate()}");
-                strings.AddRange(new TeleportModel(childTeleport).Translate());
-            }
-
-            var childRuneStone = prefab.Prefab.gameObject.GetComponentInChildren<RuneStone>();
-            if (childRuneStone)
-            {
-                Logger.LogInfo($"found rune stone in location: {new TutorialTextModel(childRuneStone).Translate()}");
-                strings.AddRange(new TutorialTextModel(childRuneStone).Translate());
-            }
-        }
-
+        
         return strings;
     }
 }

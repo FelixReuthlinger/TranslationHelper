@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using HarmonyLib;
 using Jotunn;
 using Jotunn.Entities;
 using Jotunn.Managers;
@@ -12,7 +13,7 @@ namespace TranslationsHelper
     {
         private const string PluginAuthor = "FixItFelix";
         private const string PluginName = "TranslationsHelper";
-        internal const string PluginVersion = "1.2.6";
+        internal const string PluginVersion = "1.2.7";
         internal const string PluginGuid = PluginAuthor + "." + PluginName;
 
         private void Awake()
@@ -20,6 +21,10 @@ namespace TranslationsHelper
             ModQuery.Enable();
             PrefabManager.OnPrefabsRegistered += TranslationsRegistry.Initialize;
             CommandManager.Instance.AddConsoleCommand(new TranslationsPrinterController());
+            
+            // adding custom patches
+            var harmony = new Harmony(PluginGuid);
+            harmony.PatchAll();
         }
     }
 
